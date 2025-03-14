@@ -61,6 +61,8 @@ The architecture prioritizes separation of concerns, clean interfaces, and exten
 		- When connected to the Activity Layer, a shared space can provide consistent access to external systems for all linked agents
 		- This pattern enables multi-agent collaboration through a common interface while maintaining the individual context of each agent
 		- Examples include community forums, data repositories, and integration hubs for external services
+		- Individual agents might not need to implement adapters for every external system (e.g., Discord, GitHub); instead, they can uplink to shared spaces that handle these integrations
+		- Communication with remote services occurs via the uplink protocol, creating a separation of concerns and reducing implementation complexity
 
 ## ACTIVITY LAYER
 
@@ -127,3 +129,5 @@ The architecture prioritizes separation of concerns, clean interfaces, and exten
 	- What mechanisms should be provided for element discovery during mounting?
 	- How can agent-developed extensions be validated and securely integrated?
 	- What governance structures should oversee the extension ecosystem?
+	- How should identity, authentication, and permissions be managed for uplinks to shared spaces?
+	- What delegation mechanisms are needed for an agent to access external systems through a shared space?
