@@ -19,6 +19,8 @@ The architecture prioritizes separation of concerns, clean interfaces, and exten
 The project documentation is organized as follows:
 
 - [Ontology](ontology.md): The foundational concepts, relationships, and capabilities of the platform
+- [Components](components.md): Detailed breakdown of component classification and message flow
+- [Sequence Diagram](sequence_diagram.md): Visual representation of message processing flow with GitHub-compatible Mermaid diagram
 - [Sequence 1](seq1.md): Message flow sequence illustrating the basic path of information through the system
 - [Sequence 2](seq2.md): Enhanced sequence diagram focused on timeline management
 
@@ -36,9 +38,10 @@ The project documentation is organized as follows:
 To explore the architectural concepts:
 
 1. Start with the [Ontology document](ontology.md) to understand the fundamental components
-2. Review [Sequence 1](seq1.md) to see how messages flow through the system
-3. Examine [Sequence 2](seq2.md) for deeper understanding of timeline management
-4. Explore the mockup XML for an illustrative example of the platform in action
+2. Examine the [Sequence Diagram](sequence_diagram.md) for a visual overview of the message processing flow
+3. Review the [Components document](components.md) for a detailed classification of system elements
+4. Explore the [Sequence 1](seq1.md) and [Sequence 2](seq2.md) documents for deeper technical details
+5. Study the mockup XML for an illustrative example of the platform in action
 
 ## Development Status
 

@@ -27,6 +27,116 @@ Swappable implementations that can vary without affecting architecture
 - Specific adapters
 - UI rendering strategies
 
+
+# Message Processing Flow (with Action Recording)
+
+```mermaid
+sequenceDiagram
+    participant EA as External Adapter
+    participant AL as Activity Layer
+    participant Space
+    participant Element
+    participant ED as Element Delegate
+    participant Shell
+    participant HUD
+    participant Agent
+    
+    %% External message reception
+    EA->>AL: receiveExternalEvent(externalMsg)
+    activate AL
+    Note over AL: Normalizes to internal format
+    Note over AL: Determines timeline context
+    
+    %% Space processing
+    AL->>Space: receiveEvent(event, timelineContext)
+    activate Space
+    Note over Space: Validates timeline coherence
+    Note over Space: Stores event in DAG
+    Space->>Element: receiveEvent(eventData)
+    activate Element
+    
+    %% Element processing
+    Note over Element: Updates internal state
+    Element-->>Space: notifyStateChanged()
+    Space->>Space: storeStateForTimeline(elementId, state, timelineContext)
+    deactivate Element
+    
+    %% Shell notification
+    Space-->>Shell: notifyStateChange(notification, timelineContext)
+    deactivate Space
+    deactivate AL
+    
+    %% Context rendering
+    activate Shell
+    Note over Shell: Transitions to appropriate phase
+    Shell->>HUD: prepareContextRendering(timelineContext)
+    activate HUD
+    
+    %% Get rendering from elements
+    loop For each relevant Space/Element
+        HUD->>Space: renderElementInTimeline(elementId, options, timelineContext)
+        activate Space
+        Space->>ED: render(timelineState, options)
+        activate ED
+        Note over ED: Creates renderings from state
+        ED-->>Space: renderingResult
+        deactivate ED
+        Space-->>HUD: elementRendering
+        deactivate Space
+    end
+    
+    %% Compression
+    Note over HUD: Applies compression to fit context window
+    HUD->>HUD: applyCompression(allRenderings, timelineContext)
+    HUD-->>Shell: finalContext
+    deactivate HUD
+    
+    %% Agent processing
+    Shell->>Agent: presentContext(finalContext)
+    activate Agent
+    Note over Agent: Processes context (timeline-unaware)
+    Agent-->>Shell: agentResponse
+    deactivate Agent
+    
+    %% Action parsing
+    Note over Shell: Parses agent actions
+    
+    %% Action execution
+    alt Space action
+        Shell->>Space: executeAction(action, timelineContext)
+        activate Space
+        Note over Space: Validates timeline coherence
+        
+        %% ADDED: Recording agent action in timeline
+        rect rgb(240, 240, 255)
+            Note over Space: Records agent action as event in timeline DAG
+            Space->>Space: addEventToTimeline(agentActionEvent, timelineContext)
+            Note over Space: Updates timeline context with new event
+        end
+        
+        Note over Space: Updates element state for timeline
+        Space-->>Shell: actionResult
+        deactivate Space
+    else Shell tool
+        Shell->>Shell: executeShellTool(action, timelineContext)
+        Note over Shell: Processes tool (e.g., bookmark, fork)
+    end
+    
+    %% External propagation
+    alt Primary timeline
+        Shell->>AL: sendMessage(message, timelineContext)
+        activate AL
+        AL->>EA: sendToExternal(externalMsg)
+        deactivate AL
+    else Non-primary timeline
+        Note over Shell: Actions not propagated externally
+    end
+    
+    %% Prepare for next cycle
+    Note over Shell: Stores context for next cycle
+    deactivate Shell
+```
+
 ## Message Flow Sequence with Classification
 
 ### 1. External Event Reception (F/S/D)
