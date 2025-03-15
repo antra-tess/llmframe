@@ -32,6 +32,10 @@ The project documentation is organized as follows:
 - Timeline forking and merging capabilities
 - Extensibility through agent-developed components
 - Shared Spaces for multi-agent collaboration
+- Dual architectural models for multiuser chat participation:
+  - Direct chat elements in Inner Space (communications constrained by external platform capabilities)
+  - Remote shared spaces with uplinks (enabling richer direct agent interactions beyond external platform limitations)
+  - See [detailed comparison](components.md#multiuser-chat-participation-models) with sequence diagrams
 
 ## Getting Started
 
