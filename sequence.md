@@ -9,6 +9,8 @@
 - Agent has previously exchanged messages with user "Kai"
 - Shell is currently in Engagement Phase
 
+> **Note**: This sequence document illustrates Model 2 (Uplinks to Remote Shared Spaces), where chat elements exist in remote spaces and are accessed through uplinks from the agent's Inner Space. This differs from Model 1 (Direct Chat Elements in Inner Space) described in the main components document. For details on both architectural approaches, please see the **[Multiuser Chat Participation Models](components.md#multiuser-chat-participation-models)** section in components.md.
+
 ## Sequence: Processing an Incoming Message
 
 ### 1. Activity Layer Event Reception
