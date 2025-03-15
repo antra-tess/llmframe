@@ -1,6 +1,6 @@
 # Connectome
 
-An architectural framework for digital minds, emphasizing connections, agency, context management, and coherent experiences across different environments.
+An architectural framework for digital minds, emphasizing neural-like connections, agency, context management, and coherent experiences across different environments.
 
 > The name "Connectome" is inspired by neuroscience, where a connectome is a comprehensive map of neural connections in the brain. Similarly, this platform creates a sophisticated network of connections between digital minds while maintaining their individual experiences and perspectives.
 
@@ -28,16 +28,25 @@ The project documentation is organized as follows:
 
 ## Key Features
 
-- Two-phase Shell implementation for contemplation and engagement
-- Rich context management through the ContextManager
-- Flexible Space relationships via mounting and uplinks
-- Timeline forking and merging capabilities
-- Extensibility through agent-developed components
-- Shared Spaces for multi-agent collaboration
-- Dual architectural models for multiuser chat participation:
+### Core Architecture
+- **Element System**: Spaces and Objects as core building blocks of the environment
+- **Timeline Management**: DAG-based history with forking and merging capabilities through the Loom system
+- **Shell-Element Relationship**: Clear boundaries between the agent's subjective experience and objective observations
+- **Activity Layer**: Standardized interface between external systems and the platform
+
+### Flexible Framework Components
+- **Space Relationship Models**: Mounting, uplinks, and focusing mechanisms
+- **Context Management**: Consistent handling of information across different spaces
+- **Shared Spaces**: Multi-agent collaboration environments
+- **Flexible Architectural Models** for multiuser chat participation:
   - Direct chat elements in Inner Space (communications constrained by external platform capabilities)
   - Remote shared spaces with uplinks (enabling richer direct agent interactions beyond external platform limitations)
   - See [detailed comparison](components.md#multiuser-chat-participation-models) with sequence diagrams
+
+### Customizable Features
+- Various shells, including a **Two-phase Shell**: contemplation and engagement phases for structured agent interaction
+- **ContextManager**: Personal knowledge system maintaining continuity across spaces
+- **Extensibility Tools**: Facilities for in-situ agent-developed components and extensions
 
 ## Getting Started
 
