@@ -1,4 +1,3 @@
-
 # Resonance Framework Architecture: Component Classification and Message Flow
 
 ## Component Classification
@@ -27,6 +26,7 @@ Swappable implementations that can vary without affecting architecture
 - Specific adapters
 - UI rendering strategies
 
+> **Note**: The sequence diagrams and message flow descriptions below primarily illustrate the first of two possible multiuser chat models, where chat elements are mounted directly in the agent's Inner Space. For a comparison of both possible architectural approaches (direct chat elements vs. remote shared spaces with uplinks), please see the **[Multiuser Chat Participation Models](#multiuser-chat-participation-models)** section at the end of this document.
 
 # Message Processing Flow (with Action Recording)
 
@@ -466,3 +466,222 @@ The concept of cycle completion is Fundamental, while the specific next steps va
    - New Space types can be designed (Dynamic implementation, Fundamental concept)
 
 This architecture provides a clear separation between the foundational concepts that define the system, the stable interfaces that enable component interoperability, and the dynamic implementations that allow for innovation and customization.
+
+# Multiuser Chat Participation Models
+
+The framework supports two distinct architectural approaches for agent participation in multiuser chats, each with different implications for history management, context rendering, and system scalability.
+
+## Model 1: Direct Chat Elements in Inner Space
+
+In the first model, which is the primary focus of the sequence diagrams shown earlier, chat elements are mounted directly in the agent's Inner Space. External adapters normalize events from various platforms and route them to the appropriate chat elements.
+
+```mermaid
+graph TD
+    subgraph "Agent's Inner Space"
+        IM[Inner Space Timeline]
+        S[Shell]
+        CM[Context Manager]
+        C1[Telegram Chat Element]
+        C2[Discord Chat Element]
+        C3[Slack Chat Element]
+    end
+    
+    subgraph "Activity Layer"
+        AL[Activity Layer]
+        TA[Telegram Adapter]
+        DA[Discord Adapter]
+        SA[Slack Adapter]
+    end
+    
+    subgraph "External Systems"
+        TE[Telegram]
+        DE[Discord]
+        SE[Slack]
+    end
+    
+    TE --> TA
+    DE --> DA
+    SE --> SA
+    
+    TA --> AL
+    DA --> AL
+    SA --> AL
+    
+    AL --> C1
+    AL --> C2
+    AL --> C3
+    
+    C1 --> S
+    C2 --> S
+    C3 --> S
+    
+    S --> IM
+```
+
+### Key Characteristics:
+
+1. **Direct Integration**: Chat elements are mounted directly in the agent's Inner Space
+2. **Timeline Ownership**: All events become part of the agent's subjective timeline in their Inner Space
+3. **Adapter-Centric**: Each external system requires a specific adapter to normalize events
+4. **Singular History**: Chat history is part of the agent's personal history DAG
+5. **Compression Handling**: Chat history is compressed using standard subjective timeline compression techniques
+6. **Implementation Complexity**: Each agent needs adapters for every platform they interact with
+
+## Model 2: Uplinks to Remote Shared Spaces
+
+In the second model, agents connect to remote shared spaces through uplinks. These shared spaces maintain their own timelines and can service multiple agents simultaneously.
+
+```mermaid
+graph TD
+    subgraph "Agent 1's Inner Space"
+        IM1[Inner Space Timeline]
+        S1[Shell]
+        UP1[UplinkProxy]
+    end
+    
+    subgraph "Agent 2's Inner Space"
+        IM2[Inner Space Timeline]
+        S2[Shell]
+        UP2[UplinkProxy]
+    end
+    
+    subgraph "Shared Space: Telegram Community"
+        SST[Shared Space Timeline]
+        TC[Telegram Chat Element]
+        CS1[Connection Span - Agent 1]
+        CS2[Connection Span - Agent 2]
+    end
+    
+    subgraph "Activity Layer"
+        AL[Activity Layer]
+        TA[Telegram Adapter]
+    end
+    
+    subgraph "External Systems"
+        TE[Telegram]
+    end
+    
+    TE --> TA
+    TA --> AL
+    AL --> TC
+    
+    TC --> SST
+    
+    UP1 --> SST
+    UP2 --> SST
+    
+    CS1 --> UP1
+    CS2 --> UP2
+    
+    UP1 --> S1
+    UP2 --> S2
+    
+    S1 --> IM1
+    S2 --> IM2
+```
+
+### Key Characteristics:
+
+1. **Space Separation**: Chat elements exist in separate shared spaces, not in the agent's Inner Space
+2. **Connection Spans**: The agent's Inner Space only records connection events (when connected/disconnected)
+3. **History Bundles**: History from remote spaces is retrieved as bundles during context rendering
+4. **Specialized Compression**: Remote history bundles can be partially compressed:
+   - Recent spans may be preserved in full detail
+   - Mid-term spans may keep only question-answer pairs
+   - Historical spans may be heavily summarized
+5. **Efficient Multiagent Support**: Multiple agents can uplink to the same shared space
+6. **Reduced Adapter Complexity**: Agents don't need adapters for every platform, just uplink capability
+7. **Thread-Aware Processing**: Conversational threads can be preserved during compression
+
+## Model Comparison: Message Processing Flow
+
+The following diagrams illustrate the difference in message flow between the two models:
+
+### Model 1: Direct Chat Processing
+```mermaid
+sequenceDiagram
+    participant E as External System
+    participant A as Adapter
+    participant AL as Activity Layer
+    participant CE as Chat Element (Inner Space)
+    participant S as Shell
+    participant Ag as Agent
+    
+    E->>A: External Message
+    A->>AL: Normalized Message
+    AL->>CE: Internal Event
+    Note over CE: Updates state directly in agent's timeline
+    CE->>S: Notify state change
+    S->>Ag: Update context (full history in timeline)
+    Ag->>S: Response
+    S->>CE: Execute action
+    CE->>AL: Propagate event
+    AL->>A: Format for external
+    A->>E: External message
+```
+
+### Model 2: Remote Space with Uplink
+```mermaid
+sequenceDiagram
+    participant E as External System
+    participant A as Adapter
+    participant AL as Activity Layer
+    participant RS as Remote Shared Space
+    participant CE as Chat Element (Remote)
+    participant UP as UplinkProxy
+    participant S as Shell
+    participant Ag as Agent
+    
+    E->>A: External Message
+    A->>AL: Normalized Message
+    AL->>RS: Internal Event
+    RS->>CE: Update chat element
+    
+    Note over RS: Stores event in remote space timeline
+    
+    RS->>UP: Track event in connection span
+    Note over UP: Doesn't copy event, just tracks span reference
+    
+    UP->>S: Notify state change
+    
+    Note over S: During context rendering...
+    S->>UP: Get connection spans
+    UP->>RS: Request history for spans
+    RS->>UP: Return history bundles
+    
+    Note over UP: History bundles can be partially compressed
+    
+    UP->>S: Return processed bundles
+    S->>Ag: Update context (clear boundary between subjective/remote)
+    
+    Ag->>S: Response
+    S->>RS: Execute action in remote space
+    RS->>CE: Update chat element
+    RS->>AL: Propagate event
+    AL->>A: Format for external
+    A->>E: External message
+```
+
+## Implications of the Two Models
+
+1. **Memory Efficiency**:
+   - Model 1 stores all history in the agent's timeline, which can become large
+   - Model 2 only stores connection references, retrieving history on demand
+
+2. **Context Clarity**:
+   - Model 1 blends all chat history into the agent's subjective experience
+   - Model 2 maintains clear boundaries between the agent's subjective timeline and remote observations
+
+3. **History Compression**:
+   - Model 1 applies standard compression to all history
+   - Model 2 enables specialized partial compression of remote history bundles
+
+4. **Scalability**:
+   - Model 1 requires each agent to implement adapters for every system
+   - Model 2 allows many agents to share a single implementation of external adapters
+
+5. **Multi-agent Collaboration**:
+   - Model 1 has no built-in support for agent-to-agent interaction
+   - Model 2 naturally enables multiple agents to interact in shared spaces
+
+Both models have valid use cases within the framework, and implementations can choose the appropriate model based on their specific requirements for memory efficiency, context management, and multi-agent collaboration.

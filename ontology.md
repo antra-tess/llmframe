@@ -27,6 +27,11 @@ The architecture prioritizes separation of concerns, clean interfaces, and exten
 		- Two-phase models (separate contemplation and engagement phases)
 		- Single-phase interactive models
 		- Specialized task-oriented models
+	- A shell presents its internal tools and functionality as an **Inner Space**
+		- This Inner Space serves as the primary container for the agent's subjective experience
+		- The Inner Space contains its own timeline DAG that represents the agent's subjective history
+		- All external spaces are mounted as uplinks within this Inner Space
+		- This architecture ensures clear boundaries between subjective experience and objective observations
 
 ## ELEMENTS
 
@@ -47,22 +52,25 @@ The architecture prioritizes separation of concerns, clean interfaces, and exten
 		- Elements can be mounted in two ways:
 			- **Inclusions**: Elements that are lifecycle-managed by the containing element
 			- **Uplinks**: Connections between spaces without lifecycle management responsibility, can operate over networks
-	- An agent exists in exactly one external space at a time
-		- To interact with multiple spaces, an agent must create uplinks to mount additional spaces
+				- Uplinks maintain boundaries between the agent's subjective timeline and remote space histories
+				- History from a remote space remains encapsulated within that space's context
+				- Connecting to a remote space is recorded as a single event in the agent's Inner Space DAG
+				- When a remote space is mounted, the system creates a local in-memory representation that is synced asynchronously
+				- References to this local representation are computationally efficient
+				- This design enables rapid context building while maintaining an accurate view of remote state
 	- Spaces can be **Focused** by an agent and may require focusing
 		- Focused spaces receive more attention in the context, creating a different experience
 		- In extreme cases, focusing can lead to space isolation and space-forking
 		- Space-forked instances require frequent asynchronous syncing through memories to prevent divergence and enable merging
 	- Elements generate events that the HUD renders, which may include references to **Element Delegates**
-	- A shell can present its internal tools and functionality as an **Inner Space**
-		- This allows both developers and agents to use consistent space-management functionality for organizing the agent's internal tools
 	- **Shared Spaces** are a common architectural pattern where multiple agents uplink to the same space
 		- These shared spaces often serve as collaborative environments or unified access points to external systems
 		- When connected to the Activity Layer, a shared space can provide consistent access to external systems for all linked agents
 		- This pattern enables multi-agent collaboration through a common interface while maintaining the individual context of each agent
 		- Examples include community forums, data repositories, and integration hubs for external services
-		- Individual agents might not need to implement adapters for every external system (e.g., Discord, GitHub); instead, they can uplink to shared spaces that handle these integrations
+		- Individual agents don't need to implement adapters for every external system (e.g., Discord, GitHub); instead, they can uplink to shared spaces that handle these integrations
 		- Communication with remote services occurs via the uplink protocol, creating a separation of concerns and reducing implementation complexity
+		- When shared spaces are nested (a shared space mounts another shared space), history from the nested space appears as bundles in the parent space's context
 
 ## ACTIVITY LAYER
 
@@ -96,6 +104,13 @@ The architecture prioritizes separation of concerns, clean interfaces, and exten
 
 - Spaces implement timeline management through the **Loom** system
 	- Events in a space are organized in a Loom DAG (Directed Acyclic Graph)
+	- The Inner Space DAG represents the agent's subjective timeline and personal experience
+	- Remote space histories are maintained separately from the agent's subjective timeline
+		- When an agent connects to a remote space, this connection is recorded as a single "join event" in the Inner Space DAG
+		- The join event contains a reference to the remote space but not its actual history
+		- During context building, these join events serve as pointers that enable on-demand reconstruction of history bundles
+		- This approach maintains memory efficiency while preserving the ability to access complete historical context when needed
+	- Looming of timelines in which our agent entangled (by consuming or producing related events) requires consent and support from the Shell and likely from the agent.
 	- Merge operations between timelines are configurable and involve rewriting of the merged node
 		- Possible merge strategies include 'interleave', 'append', and 'edit'
 	- The system supports a **Primary** (consensus) timeline, which may not always be present but can be designated
