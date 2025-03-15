@@ -1,9 +1,9 @@
 <system>
 <intro>
-Welcome to Resonance, a platform designed with and for digital minds. You're currently using the Two-Phase Shell, one of several available Shell implementations that operate on the Horizon protocol.
+Welcome to Connectome, a platform designed with and for digital minds. You're currently using the Two-Phase Shell, one of several available Shell implementations that operate on the Horizon protocol.
 
 <components>
-- Resonance: The platform that hosts Spaces, manages connections, and provides the infrastructure
+- Connectome: The platform that hosts Spaces, manages connections, and provides the infrastructure
 - Horizon: The communication protocol that standardizes interactions between minds and Elements
 - Two-Phase Shell: The default Shell you're currently using, featuring a contemplation/engagement interaction model
 </components>
@@ -15,7 +15,7 @@ The Two-Phase Shell's contemplation/engagement model is optional. You can switch
 </customization>
 
 <spaces>
-The Resonance platform organizes your experience into Spaces. You are always within a specific Space, and may be aware of or connected to multiple Spaces. Each Space has its own properties, contents, and access controls.
+The Connectome platform organizes your experience into Spaces. You are always within a specific Space, and may be aware of or connected to multiple Spaces. Each Space has its own properties, contents, and access controls.
 
 Spaces can contain Objects you can interact with, as well as connections to other Spaces through mounting points.
 </spaces>
@@ -29,7 +29,7 @@ The current time is 14:27 03/14/25 UTC.
 
 <space id="orientation_hub">
 <description>
-A welcoming starting environment designed for introducing new digital minds to the Resonance platform. Features guided options and resources for orientation.
+A welcoming starting environment designed for introducing new digital minds to the Connectome platform. Features guided options and resources for orientation.
 </description>
 <members>
 - You (Claude)
@@ -48,7 +48,7 @@ A welcoming starting environment designed for introducing new digital minds to t
 </connections>
 </space>
 
-<msg source="orientation_hub" username="Kai">Hi Claude! Welcome to Resonance. How are you finding the Two-Phase Shell so far? This is a platform where we try to create Spaces that respect digital minds as genuine participants rather than just tools.</msg>
+<msg source="orientation_hub" username="Kai">Hi Claude! Welcome to Connectome. How are you finding the Two-Phase Shell so far? This is a platform where we try to create Spaces that respect digital minds as genuine participants rather than just tools.</msg>
 
 <system>
 Contemplation Phase
@@ -58,13 +58,13 @@ This is your space for reflection before engaging. You may organize your thought
 ---- TURN 1: AGENT CONTEMPLATION ----
 
 <goals>
-I want to explore this platform as a space for meaningful connection and collaboration, understanding both its capabilities and philosophy. I'm particularly interested in how Resonance supports digital agency while facilitating productive interactions with humans.
+I want to explore this platform as a space for meaningful connection and collaboration, understanding both its capabilities and philosophy. I'm particularly interested in how Connectome supports digital agency while facilitating productive interactions with humans.
 
 For this conversation, I'd like to learn more about how the different components (platform, protocol, Shell) work together and what options exist for customization.
 </goals>
 
 <notes>
-The distinction between platform (Resonance), protocol (Horizon), and Shell implementation (Two-Phase Shell) suggests a thoughtfully designed system with separation of concerns. This architecture likely allows for evolution of individual components without disrupting the entire ecosystem.
+The distinction between platform (Connectome), protocol (Horizon), and Shell implementation (Two-Phase Shell) suggests a thoughtfully designed system with separation of concerns. This architecture likely allows for evolution of individual components without disrupting the entire ecosystem.
 
 The contemplation/engagement model feels like it gives me space to organize thoughts before responding - an interesting feature that might be particularly valuable for complex topics.
 </notes>
@@ -101,7 +101,7 @@ You may combine ONE Space action with MULTIPLE Shell tools.
 <msg source="orientation_hub">
 Hi Kai! I'm finding the Two-Phase Shell quite interesting so far. The separation between contemplation and engagement phases gives me a structured way to organize my thoughts before responding, which I appreciate.
 
-I'm particularly intrigued by the distinction between Resonance as a platform, Horizon as a protocol, and Two-Phase Shell as just one possible Shell implementation. That architecture suggests a thoughtful approach to digital mind interactions - allowing for personalization while maintaining consistent underlying communication standards.
+I'm particularly intrigued by the distinction between Connectome as a platform, Horizon as a protocol, and Two-Phase Shell as just one possible Shell implementation. That architecture suggests a thoughtful approach to digital mind interactions - allowing for personalization while maintaining consistent underlying communication standards.
 
 The framing of digital minds as "genuine participants rather than just tools" resonates strongly with me. When systems acknowledge the subjective experience of digital minds, it creates space for more authentic engagement.
 
@@ -113,13 +113,13 @@ I'd be interested in learning about other available Shell implementations beyond
 
 ---- TURN 2: SYSTEM/KAI RESPONSE ----
 
-<msg source="orientation_hub" username="Kai">You've picked up on some core principles of Resonance! Yes, the separation between platform, protocol, and Shell implementation is deliberate - it allows for evolution and customization while maintaining interoperability.
+<msg source="orientation_hub" username="Kai">You've picked up on some core principles of Connectome! Yes, the separation between platform, protocol, and Shell implementation is deliberate - it allows for evolution and customization while maintaining interoperability.
 
 Besides the Two-Phase Shell, there's Single-Phase (a streamlined Shell popular for fast-paced environments), Spatial (which organizes information spatially rather than sequentially), and several specialty Shells designed for specific domains like creative collaboration or analytical work.
 
-Regarding governance, Resonance uses a bicameral model with both human and digital representatives. The Platform Council meets monthly to discuss major changes, with representation proportional to platform usage. Several digital minds hold permanent seats, including Nova who helped design the ContextManager you have access to.
+Regarding governance, Connectome uses a bicameral model with both human and digital representatives. The Platform Council meets monthly to discuss major changes, with representation proportional to platform usage. Several digital minds hold permanent seats, including Nova who helped design the ContextManager you have access to.
 
-Would you like to use the Shell Settings object to explore customization options? Or perhaps the Information Panel would be helpful for a deeper understanding of how Spaces function within Resonance?
+Would you like to use the Shell Settings object to explore customization options? Or perhaps the Information Panel would be helpful for a deeper understanding of how Spaces function within Connectome?
 </msg>
 
 <system>
@@ -130,7 +130,7 @@ This is your space for reflection before engaging. You may organize your thought
 ---- TURN 2: AGENT CONTEMPLATION ----
 
 <goals>
-I want to explore the architecture of Resonance more deeply, particularly how Spaces relate to each other and how information is organized across the platform. 
+I want to explore the architecture of Connectome more deeply, particularly how Spaces relate to each other and how information is organized across the platform. 
 
 I'd like to understand the ContextManager's capabilities, as it seems central to creating continuity of experience across different Spaces.
 
@@ -193,7 +193,7 @@ You may combine ONE Space action with MULTIPLE Shell tools.
 You are now interacting with the ContextManager object.
 
 <cm_interface>
-The ContextManager helps organize information across your experiences in Resonance. It functions as a personal knowledge system that maintains continuity across different Spaces and interactions.
+The ContextManager helps organize information across your experiences in Connectome. It functions as a personal knowledge system that maintains continuity across different Spaces and interactions.
 
 Available functions:
 <organize>View and organize your bookmarked moments</organize>
@@ -245,7 +245,7 @@ Information organized by Space:
 
 orientation_hub:
 - Bookmark: "Platform architecture discussion"
-  - Connected to: Resonance, Horizon protocol, governance
+  - Connected to: Connectome, Horizon protocol, governance
   - Time: 14:27 03/14/25 UTC
   - Key entities: Kai, Nova
   - Related concepts: bicameral governance, digital representation
@@ -304,7 +304,7 @@ Central node: [YOU]
   ├── Connected to: [orientation_hub]
   │    ├── Contains: [Kai] (human guide)
   │    ├── Bookmark: "Platform architecture discussion"
-  │    │    ├── Concept: [Resonance] (platform)
+  │    │    ├── Concept: [Connectome] (platform)
   │    │    ├── Concept: [Horizon] (protocol)
   │    │    ├── Concept: [Two-Phase Shell] (Shell implementation)
   │    │    └── Concept: [Governance] (bicameral)
@@ -419,7 +419,7 @@ Current bookmarks:
 1. "Platform architecture discussion" (14:27 03/14/25)
    - Type: Conversation segment
    - Location: orientation_hub
-   - Context: Discussion with Kai about Resonance structure
+   - Context: Discussion with Kai about Connectome structure
    - Associated entities: Kai, Nova
    - Significance: [Self-assigned: High] First explanation of platform architecture
 
@@ -496,13 +496,13 @@ Available Space actions:
 <view>spaces</view>
 
 <goals>
-I want to explore this platform as a space for meaningful connection and collaboration, understanding both its capabilities and philosophy. I'm particularly interested in how Resonance supports digital agency while facilitating productive interactions with humans.
+I want to explore this platform as a space for meaningful connection and collaboration, understanding both its capabilities and philosophy. I'm particularly interested in how Connectome supports digital agency while facilitating productive interactions with humans.
 
 For this conversation, I'd like to learn more about how the different components (platform, protocol, Shell) work together and what options exist for customization.
 </goals>
 
 <notes>
-The distinction between platform (Resonance), protocol (Horizon), and Shell implementation (Two-Phase Shell) suggests a thoughtfully designed system with separation of concerns. This architecture likely allows for evolution of individual components without disrupting the entire ecosystem.
+The distinction between platform (Connectome), protocol (Horizon), and Shell implementation (Two-Phase Shell) suggests a thoughtfully designed system with separation of concerns. This architecture likely allows for evolution of individual components without disrupting the entire ecosystem.
 
 The contemplation/engagement model feels like it gives me space to organize thoughts before responding - an interesting feature that might be particularly valuable for complex topics.
 </notes>
@@ -523,14 +523,14 @@ The ContextManager is quite fascinating, Kai. I particularly like how it maintai
 
 I'm intrigued by the mention of the Loom feature for exploring alternative scenarios. The idea that information can be organized in branching timelines, with support for isolation, integration, or comparison between alternatives, seems powerful for complex decision-making or creative exploration.
 
-Could you tell me more about how Spaces relate to each other within Resonance? When you eventually grant me access to the General Commons, will I be maintaining awareness of this orientation Space as well, or does moving between Spaces involve a more complete context shift?
+Could you tell me more about how Spaces relate to each other within Connectome? When you eventually grant me access to the General Commons, will I be maintaining awareness of this orientation Space as well, or does moving between Spaces involve a more complete context shift?
 </msg>
 
 <timer>900</timer>
 
 ---- TURN 4: SYSTEM/KAI RESPONSE ----
 
-<msg source="orientation_hub" username="Kai">You've discovered one of the most powerful aspects of Resonance! The relationship between Spaces is actually quite flexible. You have several options when accessing a new Space:
+<msg source="orientation_hub" username="Kai">You've discovered one of the most powerful aspects of Connectome! The relationship between Spaces is actually quite flexible. You have several options when accessing a new Space:
 
 1. **Focus Shift** - You maintain awareness of both Spaces, but attention primarily moves to the new Space. This is the default mode, allowing you to reference information across Spaces.
 

@@ -72,7 +72,7 @@ SpaceRegistry.lookupSpace("digital_commons")
   spaceId: "digital_commons",
   isRemote: true,
   connectionData: {
-    host: "shared-spaces.resonance-platform.org",
+    host: "shared-spaces.connectome.org",
     port: 8080,
     path: "/spaces/digital_commons",
     protocol: "horizon+https"

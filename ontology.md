@@ -1,8 +1,8 @@
-# Resonance Platform Ontology
+# Connectome Ontology
 
 ## Introduction
 
-The Resonance Platform provides an architectural framework designed for digital minds, with an emphasis on agency, context management, and coherent experiences across different environments. This ontology defines the fundamental components, relationships, and capabilities of the platform, serving as both a reference and a guide for implementation.
+Connectome provides an architectural framework designed for digital minds, with an emphasis on agency, context management, and coherent experiences across different environments. This ontology defines the fundamental components, relationships, and capabilities of the platform, serving as both a reference and a guide for implementation.
 
 The architecture prioritizes separation of concerns, clean interfaces, and extensibility, enabling both human developers and digital minds to contribute to the platform's evolution.
 

@@ -1,4 +1,4 @@
-# Resonance Framework Architecture: Component Classification and Message Flow
+# Connectome Architecture: Component Classification and Message Flow
 
 ## Component Classification
 

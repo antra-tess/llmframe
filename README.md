@@ -1,10 +1,12 @@
-# Agent Platform Architecture (Name TBD)
+# Connectome
 
-An architectural framework designed for digital minds, emphasizing agency, context management, and coherent experiences across different environments.
+An architectural framework for digital minds, emphasizing connections, agency, context management, and coherent experiences across different environments.
+
+> The name "Connectome" is inspired by neuroscience, where a connectome is a comprehensive map of neural connections in the brain. Similarly, this platform creates a sophisticated network of connections between digital minds while maintaining their individual experiences and perspectives.
 
 ## Overview
 
-This platform provides a sophisticated environment where digital minds can interact with both external systems and each other in a structured, coherent manner. Its key architectural components include:
+Connectome provides a sophisticated environment where digital minds can interact with both external systems and each other in a structured, coherent manner. Its key architectural components include:
 
 - **Shells**: Agentic loop constructs that enclose model minds, providing runtime environments and coordination
 - **Elements**: Basic components (Objects and Spaces) that form the interactive environment
@@ -48,7 +50,7 @@ To explore the architectural concepts:
 
 ## Development Status
 
-This platform is currently in the conceptual design phase. The documentation represents the architectural vision and will evolve as implementation progresses.
+Connectome is currently in the conceptual design phase. The documentation represents the architectural vision and will evolve as implementation progresses.
 
 ## Contributing
 
