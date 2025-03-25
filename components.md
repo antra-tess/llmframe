@@ -87,12 +87,12 @@ sequenceDiagram
     
     %% Compression
     Note over HUD: Applies compression to fit context window
-    HUD->>HUD: applyCompression(allRenderings, timelineContext)
     HUD-->>Shell: finalContext
     deactivate HUD
-    
+
+    Shell->>Shell: applyCompression(finalContext, timelineContext)
     %% Agent processing
-    Shell->>Agent: presentContext(finalContext)
+    Shell->>Agent: presentContext(compressedContext)
     activate Agent
     Note over Agent: Processes context (timeline-unaware)
     Agent-->>Shell: agentResponse
@@ -124,7 +124,11 @@ sequenceDiagram
     
     %% External propagation
     alt Primary timeline
-        Shell->>AL: sendMessage(message, timelineContext)
+        Shell->>Space: sendMessage(message, timelineContext)
+        activate Space
+        Note over Space: Stores event in DAG
+        Space->>AL: sendMessage(message, timelineContext)
+        deactivate Space
         activate AL
         AL->>EA: sendToExternal(externalMsg)
         deactivate AL
